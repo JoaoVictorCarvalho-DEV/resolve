@@ -20,7 +20,7 @@ class SolutionController extends Controller
      */
     public function create(Request $request)
     {
-        return view('solutions.create');
+        return view('solution.create');
     }
 
     /**
@@ -55,7 +55,7 @@ class SolutionController extends Controller
     {
         $solution = Solution::findOrFail($id);
 
-        return view('solutions.edit', $solution);
+        return view('solution.edit', $solution);
     }
 
     /**

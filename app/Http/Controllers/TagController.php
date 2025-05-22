@@ -20,7 +20,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('tags.create');
+        return view('tag.create');
     }
 
     /**
@@ -52,7 +52,7 @@ class TagController extends Controller
     {
         $tag = Tag::findOrFail($id);
 
-        return view('tags.edit', $tag);
+        return view('tag.edit', $tag);
     }
 
     /**

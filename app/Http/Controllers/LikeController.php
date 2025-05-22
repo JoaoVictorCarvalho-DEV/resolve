@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use APP\Models\Like;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
@@ -11,7 +12,14 @@ class LikeController extends Controller
      */
     public function index()
     {
-        //
+        $likes = Like::all();
+        $count = Like::count();
+        $data = [
+            'count' => $count,
+            'likes' => $likes
+        ];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -19,7 +27,7 @@ class LikeController extends Controller
      */
     public function create()
     {
-        //
+        return view('like.create');
     }
 
     /**
@@ -27,7 +35,17 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* Receber os dados(e tratar) */
+        $data = $request->validate([
+            'user_id' => 'required|int',
+            'solution_id' => 'required|int'
+        ]);
+
+        /* criar o objeto */
+        $like = Like::create($data);
+
+        /* Retornar resposta */
+        return response()->json($like, 201);
     }
 
     /**
@@ -35,7 +53,8 @@ class LikeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $like = Like::find($id);
+        return $like;
     }
 
     /**
@@ -43,7 +62,8 @@ class LikeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $like = Like::findOrFail($id);
+        return view('like.edit', $like);
     }
 
     /**
@@ -51,7 +71,19 @@ class LikeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        /* Encontrar o dado like */
+        $like = Like::findOrFail($id);
+
+        /* Receber os dados(e tratar) */
+        $data = $request->validate([
+            'user_id' => 'required|int',
+            'solution_id' => 'required|int'
+        ]);
+
+        /* Editar */
+        $like->update($data);
+        /* Retornar a resposta */
+        return response()->json($like, 200);
     }
 
     /**
@@ -59,6 +91,7 @@ class LikeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $like = Like::find($id);
+        $like->delete();
     }
 }
