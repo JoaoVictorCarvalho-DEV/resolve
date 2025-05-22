@@ -45,7 +45,8 @@ class LikeController extends Controller
         $like = Like::create($data);
 
         /* Retornar resposta */
-        return response()->json($like, 201);
+        return redirect()->back()->with('success', 'Like adicionado com sucesso!');
+        /* return response()->json($like, 201); */
     }
 
     /**
@@ -82,8 +83,10 @@ class LikeController extends Controller
 
         /* Editar */
         $like->update($data);
+
         /* Retornar a resposta */
-        return response()->json($like, 200);
+        return redirect()->back()->with('success', 'Like editado com sucesso!');
+        /* return response()->json($like, 200); */
     }
 
     /**

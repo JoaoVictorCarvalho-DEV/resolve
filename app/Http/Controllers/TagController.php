@@ -34,7 +34,8 @@ class TagController extends Controller
 
         $tag = Tag::create($data);
 
-        return response()->json($tag, 201);//Status code de criação
+        return redirect()->back()->with('success', 'Tag criada com sucesso!');
+        /* return response()->json($tag, 201); *///Status code de criação
     }
 
     /**
@@ -65,7 +66,8 @@ class TagController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:50'
         ]);
-        return response()->json($data,200);
+        return redirect()->back()->with('success', 'Tag editada com sucesso!');
+        /* return response()->json($data,200); */
     }
 
     /**

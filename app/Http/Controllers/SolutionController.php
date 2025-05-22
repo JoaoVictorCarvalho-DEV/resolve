@@ -37,7 +37,8 @@ class SolutionController extends Controller
 
         $solution = Solution::create($atributos);
 
-        return response()->json($solution, 201);
+        /* return response()->json($solution, 201); */
+        return redirect()->back()->with('success', 'Solução criada com sucesso!');
     }
 
     /**
@@ -73,7 +74,8 @@ class SolutionController extends Controller
 
         $solution->update($data);
 
-        return response()->json($solution, 200);
+        /* return response()->json($solution, 200); */
+        return redirect()->back()->with('success', 'Solução editada com sucesso!') ;
     }
 
     /**

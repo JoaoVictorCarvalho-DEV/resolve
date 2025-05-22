@@ -74,7 +74,7 @@ class CommentController extends Controller
         ]);
 
         $comment->update($data);
-        return redirect()->back()->with('success', 'Commentario editado com sucesso!');
+        return redirect()->back()->with('success', 'Comentário editado com sucesso!');
     }
 
     /**
