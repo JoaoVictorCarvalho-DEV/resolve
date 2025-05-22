@@ -32,10 +32,9 @@ class TagController extends Controller
             'name' => 'required|string|max:50'
         ]);
 
-        $tag = Tag::create($data);
+        Tag::create($data);
 
         return redirect()->back()->with('success', 'Tag criada com sucesso!');
-        /* return response()->json($tag, 201); *///Status code de criação
     }
 
     /**
@@ -43,7 +42,8 @@ class TagController extends Controller
      */
     public function show(string $id)
     {
-        return $tag = Tag::find($id);
+        $tag = Tag::findOrFail($id);
+        return $tag;
     }
 
     /**
@@ -53,7 +53,7 @@ class TagController extends Controller
     {
         $tag = Tag::findOrFail($id);
 
-        return view('tag.edit', $tag);
+        return view('tag.edit', ['tag'=>$tag]);
     }
 
     /**
@@ -66,8 +66,9 @@ class TagController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:50'
         ]);
+
+        $tag::update($data);
         return redirect()->back()->with('success', 'Tag editada com sucesso!');
-        /* return response()->json($data,200); */
     }
 
     /**
@@ -75,7 +76,7 @@ class TagController extends Controller
      */
     public function destroy(string $id)
     {
-        $tag = Tag::find($id);
+        $tag = Tag::findOrFail($id);
         $tag->delete();
     }
 }

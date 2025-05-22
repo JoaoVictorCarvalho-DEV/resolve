@@ -46,7 +46,7 @@ class SolutionController extends Controller
      */
     public function show(string $id)
     {
-        return Solution::find($id);
+        return Solution::findOrFail($id);
     }
 
     /**
@@ -56,7 +56,7 @@ class SolutionController extends Controller
     {
         $solution = Solution::findOrFail($id);
 
-        return view('solution.edit', $solution);
+        return view('solution.edit', ['solution'=>$solution]);
     }
 
     /**
@@ -83,7 +83,7 @@ class SolutionController extends Controller
      */
     public function destroy(string $id)
     {
-        $solution = Solution::find(1);
+        $solution = Solution::findOrFail($id);
         $solution->delete();
 
     }

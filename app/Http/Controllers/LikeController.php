@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use APP\Models\Like;
+use App\Models\Like;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
@@ -37,8 +37,8 @@ class LikeController extends Controller
     {
         /* Receber os dados(e tratar) */
         $data = $request->validate([
-            'user_id' => 'required|int',
-            'solution_id' => 'required|int'
+            'user_id' => 'required|integer|exists:users,id',
+            'solution_id' => 'required|integer|exists:solutions,id',
         ]);
 
         /* criar o objeto */
@@ -46,7 +46,6 @@ class LikeController extends Controller
 
         /* Retornar resposta */
         return redirect()->back()->with('success', 'Like adicionado com sucesso!');
-        /* return response()->json($like, 201); */
     }
 
     /**
@@ -54,7 +53,7 @@ class LikeController extends Controller
      */
     public function show(string $id)
     {
-        $like = Like::find($id);
+        $like = Like::findOrFail($id);
         return $like;
     }
 
@@ -64,7 +63,7 @@ class LikeController extends Controller
     public function edit(string $id)
     {
         $like = Like::findOrFail($id);
-        return view('like.edit', $like);
+        return view('like.edit', ['like' => $like]);
     }
 
     /**
@@ -86,7 +85,6 @@ class LikeController extends Controller
 
         /* Retornar a resposta */
         return redirect()->back()->with('success', 'Like editado com sucesso!');
-        /* return response()->json($like, 200); */
     }
 
     /**
@@ -94,7 +92,7 @@ class LikeController extends Controller
      */
     public function destroy(string $id)
     {
-        $like = Like::find($id);
+        $like = Like::findOrFail($id);
         $like->delete();
     }
 }

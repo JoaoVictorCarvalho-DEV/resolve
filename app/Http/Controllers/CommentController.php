@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'solution_id'=> 'required|integer|exists:solutions,id' ,
+            'solution_id' => 'required|integer|exists:solutions,id',
             'comment' => 'required|string|max:500'
         ]);
 
@@ -59,7 +60,7 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
 
-        return view('comment.edit', $comment);
+        return view('comment.edit', ['comment' => $comment]);
     }
 
     /**
