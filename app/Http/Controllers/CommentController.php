@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Comment;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -11,7 +13,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+        return $comments;
     }
 
     /**
@@ -19,7 +22,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        return view('comment.create');
     }
 
     /**
@@ -27,7 +30,16 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'solution_id'=> 'required|integer|exists:solutions,id' ,
+            'comment' => 'required|string|max:500'
+        ]);
+
+        $data['user_id'] = Auth::id();
+
+        Comment::create($data);
+        return redirect()->back()->with('success', 'Comentário enviado com sucesso!');
+        /* return response()->json($comment, 201); Retirei pois essa parte é mais usada para APIs ao invés de web  */
     }
 
     /**
@@ -35,7 +47,9 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+
+        return $comment;
     }
 
     /**
@@ -43,7 +57,9 @@ class CommentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+
+        return view('comment.edit', $comment);
     }
 
     /**
@@ -51,7 +67,14 @@ class CommentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+
+        $data = $request->validate([
+            'comment' => 'required|string|max:500'
+        ]);
+
+        $comment->update($data);
+        return redirect()->back()->with('success', 'Commentario editado com sucesso!');
     }
 
     /**
@@ -59,6 +82,7 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
     }
 }

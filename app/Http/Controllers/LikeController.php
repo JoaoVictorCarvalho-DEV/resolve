@@ -76,8 +76,8 @@ class LikeController extends Controller
 
         /* Receber os dados(e tratar) */
         $data = $request->validate([
-            'user_id' => 'required|int',
-            'solution_id' => 'required|int'
+            'user_id' => 'required|integer|exists:users,id',
+            'solution_id' => 'required|integer|exists:solutions,id'
         ]);
 
         /* Editar */
