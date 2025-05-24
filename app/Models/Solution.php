@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Solution extends Model
 {
+    //Aparentemente isso aqui nem sequer é necessário, só pra IDE
     /** @use HasFactory<\Database\Factories\SolutionFactory> */
     use HasFactory;
     protected $fillable = [
