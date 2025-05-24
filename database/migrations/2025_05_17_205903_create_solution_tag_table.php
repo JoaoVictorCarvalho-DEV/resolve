@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('tag_id')->constrained('tags')->onDelete('cascade');
             $table->timestamps();
 
-            $table->primary(['solution_id'],'tag_id');//evita que o mesmo relacionamento seja criado
+            $table->primary(['solution_id','tag_id']);//evita que o mesmo relacionamento seja criado
         });
     }
 
