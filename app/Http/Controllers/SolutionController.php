@@ -12,7 +12,8 @@ class SolutionController extends Controller
      */
     public function index()
     {
-        return $solution = Solution::all();
+        $solutions = Solution::all();
+        return view('solution.index', compact('solutions'));
     }
 
     /**

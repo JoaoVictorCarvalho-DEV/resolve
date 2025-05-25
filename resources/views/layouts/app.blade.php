@@ -10,7 +10,7 @@
 
 <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen">
 
-    <header class="bg-white dark:bg-gray-800 shadow">
+    <header class="bg-white dark:bg-gray-800 shadow fixed w-full top-0 left-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold text-indigo-600">Resolve</h1>
             <nav class="space-x-4">
@@ -25,7 +25,7 @@
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8">
+    <main class="max-w-5xl mx-auto pt-16 px-4 py-8">
         @yield('content')
     </main>
 
