@@ -47,7 +47,8 @@ class SolutionController extends Controller
      */
     public function show(string $id)
     {
-        return Solution::findOrFail($id);
+        $solution = Solution::findOrFail($id);
+        return view('solution.show', compact('solution'));
     }
 
     /**
