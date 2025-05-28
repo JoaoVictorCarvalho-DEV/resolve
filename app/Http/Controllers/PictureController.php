@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Picture;
 use Illuminate\Http\Request;
 
 class PictureController extends Controller
@@ -11,7 +12,8 @@ class PictureController extends Controller
      */
     public function index()
     {
-        //
+        $pictures = Picture::all();
+        return view('picture.index', compact($pictures));
     }
 
     /**
@@ -19,7 +21,7 @@ class PictureController extends Controller
      */
     public function create()
     {
-        //
+        return view('picture.create');
     }
 
     /**
@@ -27,7 +29,20 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data  = $request->validate([
+            'title'=>'required|string|max:50',
+            'description' => 'sometimes|string',
+            'solution_id' => 'required|exists:solutions,id'
+        ]);
+
+        $path = $request->file('pictures')->store('pictures', 'public');
+
+        $data['path'] = $path;
+
+        Picture::create($data);
+
+        return redirect()->back()->with('success', 'Imagem salva com sucesso!');
+
     }
 
     /**
@@ -35,7 +50,9 @@ class PictureController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $picture = Picture::findOrFail($id);
+
+        return view('picture.show', compact($picture));
     }
 
     /**
@@ -43,7 +60,9 @@ class PictureController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $picture = Picture::findOrFail($id);
+
+        return view('picture.edit', compact($picture));
     }
 
     /**
@@ -51,7 +70,20 @@ class PictureController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $picture = Picture::findOrFail($id);
+        $data  = $request->validate([
+            'title'=>'required|string|max:50',
+            'description' => 'sometimes|string',
+            'solution_id' => 'required|exists:solutions,id'
+        ]);
+
+        $path = $request->file('pictures')->store('pictures', 'public');
+
+        $data['path'] = $path;
+
+        $picture->update($data);
+
+        return redirect()->back()->with('success', 'Imagem editada com sucesso!');
     }
 
     /**
@@ -59,6 +91,10 @@ class PictureController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $picture = Picture::findOrFail($id);
+
+        $picture->delete();
+
+        return redirect()->back()->with('success', 'Imagem deletada com sucesso!');
     }
 }

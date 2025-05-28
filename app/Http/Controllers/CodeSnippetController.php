@@ -34,7 +34,7 @@ class CodeSnippetController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:50',
             'code'=> 'required|string|',
-            'solution_id' => 'exists:solution_id'
+            'solution_id' => 'exists:solutions,id'
         ]);
 
         CodeSnippet::create($data);
@@ -69,7 +69,7 @@ class CodeSnippetController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:50',
             'code'=> 'required|string|',
-            'solution_id' => 'exists:solution_id'
+            'solution_id' => 'exists:solutions,id'
         ]);
 
         $codeSnippet->update($data);
@@ -85,5 +85,7 @@ class CodeSnippetController extends Controller
     {
         $codeSnippet = CodeSnippet::findOrFail($id);
         $codeSnippet->delete();
+
+        return redirect()->back()->with('success', 'Código deletado com sucesso!');
     }
 }

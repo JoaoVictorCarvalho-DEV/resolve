@@ -35,7 +35,7 @@ class SolutionController extends Controller
             'user_id'       => 'required|exists:users,id'
         ]);
 
-        $solution = Solution::create($atributos);
+        Solution::create($atributos);
 
         /* return response()->json($solution, 201); */
         return redirect()->back()->with('success', 'Solução criada com sucesso!');
@@ -85,6 +85,6 @@ class SolutionController extends Controller
     {
         $solution = Solution::findOrFail($id);
         $solution->delete();
-
+        return redirect()->back()->with('success', 'Solução deletada com sucesso!');
     }
 }

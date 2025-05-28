@@ -94,5 +94,6 @@ class LikeController extends Controller
     {
         $like = Like::findOrFail($id);
         $like->delete();
+        return redirect()->back()->with('success', 'Like deletado com sucesso!');
     }
 }
