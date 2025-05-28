@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Solution;
 use Illuminate\Http\Request;
+use App\Models\CodeSnippet;
 
 class SolutionController extends Controller
 {
@@ -34,6 +35,8 @@ class SolutionController extends Controller
             'description'   => 'sometimes|string',
             'user_id'       => 'required|exists:users,id'
         ]);
+
+        
 
         Solution::create($atributos);
 
