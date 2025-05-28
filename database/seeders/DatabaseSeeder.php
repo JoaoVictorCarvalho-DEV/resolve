@@ -26,7 +26,5 @@ class DatabaseSeeder extends Seeder
         Solution::factory(10)->create();
 
         Comment::factory(10)->create();
-
-
     }
 }
