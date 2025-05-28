@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Solution;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class VideoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(2),
+            'path' => $this->faker->url(),
+            'description' => $this->faker->paragraph(),
+            'solution_id' => Solution::factory()
         ];
     }
+
 }

@@ -46,11 +46,11 @@ class Solution extends Model
         return $this->hasMany(CodeSnippet::class);
     }
 
-    public function Videos(){
+    public function videos(){
         return $this->hasMany(Video::class);
     }
 
-    public function Pictures(){
+    public function pictures(){
         return $this->hasMany(Picture::class);
     }
 

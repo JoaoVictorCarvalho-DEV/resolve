@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\Solution;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CodeSnippet>
  */
@@ -17,7 +17,9 @@ class CodeSnippetFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+        'title' => $this->faker->sentence(3),
+        'code'=> $this->faker->paragraph(),
+        'solution_id' => Solution::factory()
         ];
     }
 }

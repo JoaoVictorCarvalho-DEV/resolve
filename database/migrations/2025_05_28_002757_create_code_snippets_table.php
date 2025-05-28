@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('code_snippets', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title', 50);
             $table->text('code');
             $table->foreignId('solution_id')->constrained()->onDelete('cascade');
             $table->timestamps();
