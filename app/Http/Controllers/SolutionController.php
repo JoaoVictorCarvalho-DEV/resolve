@@ -32,7 +32,6 @@ class SolutionController extends Controller
         $atributos = $request->validate([
             'title'         => 'required|string|max:255',
             'description'   => 'sometimes|string',
-            'code_snippet'  => 'sometimes|string',
             'user_id'       => 'required|exists:users,id'
         ]);
 
@@ -69,7 +68,6 @@ class SolutionController extends Controller
         $data = $request->validate([
             'title'         => 'sometimes|string|max:255',
             'description'   => 'sometimes|string',
-            'code_snippet'  => 'sometimes|string',
         ]);
 
         $solution = Solution::findOrFail($id);

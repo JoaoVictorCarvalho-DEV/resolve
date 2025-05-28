@@ -24,11 +24,6 @@
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" >{{ $solution->description }}</textarea>
             </div>
 
-            <div>
-                <label for="code_snippet" class="block text-sm font-medium text-gray-700">Código</label>
-                <input type="text" name="code_snippet" id="code_snippet"
-                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" value="{{ $solution->code_snippet }}">
-            </div>
 
             <div>
                 <label for="user_id" class="block text-sm font-medium text-gray-700">ID do Usuário</label>

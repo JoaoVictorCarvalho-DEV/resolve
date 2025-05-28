@@ -13,7 +13,6 @@ class Solution extends Model
     protected $fillable = [
         'title',
         'description',
-        'code_snippet',
         'user_id'
     ];
 
