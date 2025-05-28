@@ -41,4 +41,17 @@ class Solution extends Model
     {
         return $this->likes()->count();
     }
+
+    public function codeSnippets(){
+        return $this->hasMany(CodeSnippet::class);
+    }
+
+    public function Videos(){
+        return $this->hasMany(Video::class);
+    }
+
+    public function Pictures(){
+        return $this->hasMany(Picture::class);
+    }
+
 }
