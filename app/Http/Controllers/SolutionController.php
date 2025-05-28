@@ -57,7 +57,7 @@ class SolutionController extends Controller
     {
         $solution = Solution::findOrFail($id);
 
-        return view('solution.edit', compact($solution));
+        return view('solution.edit', compact(['solution']));
     }
 
     /**
