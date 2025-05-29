@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create solution') }}
+            {{ __('Criar solução') }}
         </h2>
     </x-slot>
     <div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md text-black">
