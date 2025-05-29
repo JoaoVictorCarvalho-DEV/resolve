@@ -1,13 +1,9 @@
-@extends('layouts.app')
-
-@section('title', 'Soluções')
-
-@section('content')
+<x-app-layout>
     <h1 class='text-xl font-semibold text-indigo-600 mb-2'>
         Todas as soluções
     </h1>
 
-    <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+    <div class='grid container mx-auto px-4 py-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         @foreach ($solutions as $solution)
             <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition align-middle">
                 <h3 class="text-lg font-semibold text-indigo-600 mb-2">{{ $solution->title }}</h3>
@@ -31,4 +27,4 @@
         @endforeach
     </div>
 
-@endsection
+</x-app-layout>

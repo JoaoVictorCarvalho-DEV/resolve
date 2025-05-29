@@ -1,7 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Editar solução')
-@section('content')
+<x-app-layout>
     <div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md text-black">
         @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
@@ -39,4 +36,4 @@
             </div>
         </form>
     </div>
-@endsection
+</x-app-layout>
