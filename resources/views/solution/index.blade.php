@@ -1,7 +1,10 @@
 <x-app-layout>
-    <h1 class='text-xl font-semibold text-indigo-600 mb-2'>
-        Todas as soluções
-    </h1>
+
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('All solutions') }}
+        </h2>
+    </x-slot>
 
     <div class='grid container mx-auto px-4 py-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         @foreach ($solutions as $solution)

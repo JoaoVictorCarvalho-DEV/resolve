@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Mostrar solução')
-
-@section('content')
+<x-app-layout>
 <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
     <!-- Título -->
     <h1 class="text-3xl font-bold">Título da solução</h1>
@@ -63,4 +59,4 @@
         </p>
     </div>
 </div>
-@endsection
+</x-app-layout>
