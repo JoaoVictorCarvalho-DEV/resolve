@@ -45,7 +45,6 @@ class SolutionController extends Controller
 
         dd($data);
 
-
         $solution = Solution::create($data);
 
         if ($request->has('code_snippets')) {
