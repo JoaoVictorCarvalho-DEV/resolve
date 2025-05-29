@@ -16,7 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('solutions.index')" :active="request()->routeIs('solutions.index')">
-                        {{ __('Solutions') }}
+                        {{ __('Soluções') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('solutions.create')" :active="request()->routeIs('solutions.create')">
+                        {{ __('Criar solução') }}
                     </x-nav-link>
                 </div>
 

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Solution;
 use Illuminate\Http\Request;
 
-use App\Models\CodeSnippet;
+use Illuminate\Support\Facades\Log;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -36,24 +37,19 @@ class SolutionController extends Controller
         $data = $request->validate([
             'title'                 => 'required|string|max:255',
             'description'           => 'sometimes|string',
-            'code_snippets'         => 'nullable|string',
+            'code_snippets'         => 'nullable|array',
             'code_snippets.*.title' => 'required|string', // Valida cada título
             'code_snippets.*.code'  => 'required|string',
-        ]);
+        ]);//validate é bem silencioso ao dar algo errado...
 
         $data['user_id'] = Auth::id();
-
-        dd($data);
 
         $solution = Solution::create($data);
 
         if ($request->has('code_snippets')) {
             foreach ($request->input('code_snippets') as $codeSnippet) {
-                $solution->codeSnippets()->create([
-                    'title'         => $codeSnippet['title'],
-                    'code'          => $codeSnippet['code'],
-                    'solution_id'   => $solution->id
-                ]);
+                $solution->codeSnippets()->create($codeSnippet);
+
             }
         }
 
