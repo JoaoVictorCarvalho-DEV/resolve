@@ -1,7 +1,5 @@
-@extends('layouts.app')
-
-@section('content')
-    <div class="min-h-screen flex flex-col items-center justify-center text-white">
+<x-guest-layout>
+    <div class="flex flex-col items-center justify-center text-indigo-700 py-3">
         <div class="text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-6">Bem-vindo ao Resolve</h1>
             <p class="text-lg md:text-xl mb-8">Tem um problema? Talvez alguém já tenha o tido! Vem e Resolve.</p>
@@ -10,4 +8,4 @@
             </a>
         </div>
     </div>
-@endsection
+</x-guest-layout>
