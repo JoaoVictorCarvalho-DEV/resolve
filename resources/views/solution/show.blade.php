@@ -7,62 +7,65 @@
     </x-slot>
     <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
         <!-- Título -->
-        <h1 class="text-3xl font-bold">Título da solução</h1>
+        <h1 class="text-3xl font-bold">{{ $solution->title }}</h1>
 
         <!-- Descrição -->
         <div>
             <h2 class="text-lg font-semibold mb-2">Descrição da solução</h2>
             <p class="text-gray-700 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus at quam tempor luctus.
-                Integer luctus, mauris a luctus pretium, velit mauris pharetra sem, a cursus ex mi in mauris.
+                {{ $solution->description }}
             </p>
         </div>
 
         <!-- Vídeos -->
-        <div>
-            <h2 class="text-lg font-semibold mb-4">Vídeo</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                @for ($i = 0; $i < 3; $i++)
-                    <div class="bg-indigo-600 rounded-lg h-40 flex items-center justify-center text-white text-4xl">
-                        ▶️
-                    </div>
-                @endfor
+        @if (!empty($solution->videos->isNotEmpty()))
+            <div>
+                <h2 class="text-lg font-semibold mb-4">Vídeos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @foreach ($solution->videos as $video)
+                        <div>
+                            {{ $video->title }}
+                            <div
+                                class="bg-indigo-600 rounded-lg h-max flex items-center justify-center text-white text-4xl p-4">
+                                <video width="320" height="240" controls>
+                                    <source src="{{ asset('storage/' . $video->path) }}" type="video/mp4">
+                                    Seu navegador não suporta vídeos
+                                </video>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
+        @endif
 
-        <!-- Imagens -->
-        <div>
-            <h2 class="text-lg font-semibold mb-4">Imagens</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                @for ($i = 0; $i < 3; $i++)
-                    <div class="bg-indigo-600 rounded-lg h-40 flex items-center justify-center text-white text-4xl">
-                        🖼️
-                    </div>
-                @endfor
+        @if (!empty($solution->pictures->isNotEmpty()))
+            <!-- Imagens -->
+            <div>
+                <h2 class="text-lg font-semibold mb-4">Imagens</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @foreach ($solution->pictures as $picture)
+                        <div>
+                            <h3>{{ $picture->title }}</h3>
+                            <div
+                                class="bg-indigo-600 rounded-lg flex items-center justify-center text-white text-4xl p-4">
+                                <img src="{{ asset('storage/' . $picture->path) }}" alt="Imagem da solução">
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
-
+        @endif
         <!-- Códigos -->
         <div>
             <h2 class="text-lg font-semibold mb-4">Códigos</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                @for ($i = 0; $i < 3; $i++)
-                    <div class="bg-indigo-600 rounded-lg h-40 flex items-center justify-center text-white text-4xl">
-                        < />
-                    </div>
-                @endfor
+            <div class="grid grid-cols-1 gap-4">
+                @foreach ($solution->codeSnippets as $snippet)
+                    <h3 class="font-bold text-lg mt-4">{{ $snippet->title }}</h3>
+                    <pre><code class="language-php">{{ $snippet->code }}</code></pre>
+                @endforeach
             </div>
         </div>
 
-        <!-- Passo a passo -->
-        <div>
-            <h2 class="text-lg font-semibold mb-2">Passo a passo</h2>
-            <p class="bg-indigo-600 text-white rounded-lg p-4 leading-relaxed">
-                1. Lorem ipsum dolor sit amet, consectetur.<br>
-                2. Sed do eiusmod tempor incididunt ut labore.<br>
-                3. Ut enim ad minim veniam.<br>
-                4. Duis aute irure dolor in reprehenderit.
-            </p>
-        </div>
     </div>
+
 </x-app-layout>
