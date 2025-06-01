@@ -40,8 +40,16 @@ class SolutionController extends Controller
             'code_snippets'         => 'nullable|array',
             'code_snippets.*.title' => 'required|string', // Valida cada título
             'code_snippets.*.code'  => 'required|string',
-        ]);//validate é bem silencioso ao dar algo errado...
+            'videos'                => 'nullable|array',
+            'videos.*.title'        => 'required_with:videos|string|max:50',
+            'videos.*.description'  => 'nullable|string',
+            'videos.*.file'         => 'required_with:videos|file|mimetypes:video/mp4,video/x-msvideo,video/quicktime|max:51200',
+            'pictures'              => 'nullable|array',
+            'picutes.*.title'       => 'required_with:pictures|string|max:50',
+            'pictures.*.description'=> 'nullable|string',
+            'pictures.*.file'       => 'required_with:pictures|image|max:51200'
 
+        ]);//validate é bem silencioso ao dar algo errado...
         $data['user_id'] = Auth::id();
 
         $solution = Solution::create($data);
@@ -49,11 +57,39 @@ class SolutionController extends Controller
         if ($request->has('code_snippets')) {
             foreach ($request->input('code_snippets') as $codeSnippet) {
                 $solution->codeSnippets()->create($codeSnippet);
-
             }
         }
 
-        /* return response()->json($solution, 201); */
+        //Todo
+        //1 - Check if has files
+        if($request->has('videos')){
+            //a - Iterate all files
+            foreach($request->videos as $video){
+                //a.1 - Pick the file path and store it
+                $path = $video['file']->store('videos', 'public');
+
+                //a.2 - Create and associate the file at the solution
+                $solution->videos()->create([
+                    'title' => $video['title'],
+                    'description' => $video['description'] ?? "",
+                    'path' => $path
+                ]);
+            }
+
+        }
+
+        if($request->has('pictures')){
+            foreach($request->pictures as $picture){
+                $path = $picture['file']->store('pictures', 'public');
+
+                $solution->pictures()->create([
+                    'title' => $picture['title'],
+                    'description' => $picture['description'] ?? "",
+                    'path' => $path
+                ]);
+            }
+        }
+
         return redirect()->back()->with('success', 'Solução criada com sucesso!');
     }
 

@@ -12,7 +12,8 @@
             </div>
         @endif
 
-        <form action="{{ route('solutions.store') }}" method="POST" class="space-y-4" id="solution-form">
+        <form action="{{ route('solutions.store') }}" method="POST" class="space-y-4" id="solution-form"
+            enctype="multipart/form-data">
             @csrf
 
             <div>
@@ -53,6 +54,25 @@
                             class="mt-1 block w-full font-mono text-sm border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"></textarea>
                     </div>
 
+                </div>
+            </div>
+            <div class="space-y-4" id="videos-container">
+                <div class="flex justify-between items-center">
+                    <label class="block text-sm font-medium text-gray-700">Vídeos</label>
+                    <button type="button" onclick="addVideo()"
+                        class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                        + Adicionar Vídeo
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-y-4" id="pictures-container">
+                <div class="flex justify-between items-center">
+                    <label class="block text-sm font-medium text-gray-700">Imagens</label>
+                    <button type="button" onclick="addPicture()"
+                        class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                        + Adicionar Imagem
+                    </button>
                 </div>
             </div>
 
@@ -99,6 +119,80 @@
             } else {
                 alert('Você precisa ter pelo menos um bloco de código.');
             }
+        }
+    </script>
+
+    <script>
+        let videoCounter = 0;
+
+        function addVideo() {
+            const container = document.getElementById('videos-container');
+            const newVideo = document.createElement('div');
+            newVideo.className = 'video-group border border-gray-200 p-4 rounded-lg mt-4';
+            newVideo.innerHTML = `
+                <div class='mb-4'>
+                    <label class="block text-sm font-medium text-gray-700">Título do vídeo</label>
+                    <input type="text" name="videos[${videoCounter}][title]"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class='mb-4'>
+                    <label class="block text-sm font-medium text-gray-700">Descrição</label>
+                    <input type="text" name="videos[${videoCounter}][description]"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class='mb-4'>
+                    <label class="block text-sm font-medium text-gray-700">Vídeo</label>
+                    <input type="file" name="videos[${videoCounter}][file]">
+                </div>
+                <button type="button" onclick="removeVideo(this)" class="mt-2 text-red-600 hover:text-red-800 text-sm">
+                    Remover Bloco
+                </button>
+
+            `;
+            container.appendChild(newVideo);
+            videoCounter++;
+        }
+
+        function removeVideo(button) {
+            videoCounter--;
+
+            button.closest('.video-group').remove();
+        }
+    </script>
+    <script>
+        let pictureCounter = 0;
+
+        function addPicture() {
+            const container = document.getElementById('pictures-container');
+            const newPicture = document.createElement('div');
+            newPicture.className = 'picture-group border border-gray-200 p-4 rounded-lg mt-4';
+            newPicture.innerHTML = `
+                <div class='mb-4'>
+                    <label class="block text-sm font-medium text-gray-700">Título do vídeo</label>
+                    <input type="text" name="pictures[${pictureCounter}][title]"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class='mb-4'>
+                    <label class="block text-sm font-medium text-gray-700">Descrição</label>
+                    <input type="text" name="pictures[${pictureCounter}][description]"
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div class='mb-4'>
+                    <label class="block text-sm font-medium text-gray-700">Imagem</label>
+                    <input type="file" name="pictures[${pictureCounter}][file]">
+                </div>
+                <button type="button" onclick="removePicture(this)" class="mt-2 text-red-600 hover:text-red-800 text-sm">
+                    Remover Bloco
+                </button>
+
+            `;
+            container.appendChild(newPicture);
+            picturesCounter++;
+        }
+
+        function removePicture(button) {
+            pictureCounter--;
+            button.closest('.picture-group').remove();
         }
     </script>
 </x-app-layout>
