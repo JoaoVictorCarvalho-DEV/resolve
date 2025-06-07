@@ -24,7 +24,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     @foreach ($solution->videos as $video)
                         <div>
-                            {{ $video->title }}
+                            <h5>{{ $video->title }}</h5>
                             <div
                                 class="bg-indigo-600 rounded-lg h-max flex items-center justify-center text-white text-4xl p-4">
                                 <video width="320" height="240" controls>
@@ -60,8 +60,10 @@
             <h2 class="text-lg font-semibold mb-4">Códigos</h2>
             <div class="grid grid-cols-1 gap-4">
                 @foreach ($solution->codeSnippets as $snippet)
-                    <h3 class="font-bold text-lg mt-4">{{ $snippet->title }}</h3>
-                    <pre><code class="language-php">{{ $snippet->code }}</code></pre>
+                    <div>
+                        <h5 class="mt-4">{{ $snippet->title }}</h5>
+                        <pre><code class="language-php">{{ $snippet->code }}</code></pre>
+                    </div>
                 @endforeach
             </div>
         </div>
