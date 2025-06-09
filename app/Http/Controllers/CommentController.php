@@ -40,7 +40,6 @@ class CommentController extends Controller
 
         Comment::create($data);
         return redirect()->back()->with('success', 'Comentário enviado com sucesso!');
-        /* return response()->json($comment, 201); Retirei pois essa parte é mais usada para APIs ao invés de web  */
     }
 
     /**
