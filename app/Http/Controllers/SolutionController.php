@@ -129,8 +129,6 @@ class SolutionController extends Controller
             'description'   => 'sometimes|string',
         ]);
 
-
-
         /* Gate::authorize('update', $solution); */
 
         $solution->update($data);

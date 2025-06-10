@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CodeSnippetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SolutionController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('solutions', SolutionController::class);
     Route::resource('comments', CommentController::class);
+    Route::resource('codeSnippets',CodeSnippetController::class);
 });
+
 
 
 
