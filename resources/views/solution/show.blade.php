@@ -61,8 +61,15 @@
             <div class="grid grid-cols-1 gap-4">
                 @foreach ($solution->codeSnippets as $snippet)
                     <div>
+
                         <h5 class="mt-4">{{ $snippet->title }}</h5>
                         <pre><code class="language-php">{{ $snippet->code }}</code></pre>
+                        @can('update', [$snippet])
+                            <a class='justify-end flex' href="{{ route('codeSnippets.edit', $snippet->id) }}">
+                                <p>Editar</p>
+                            </a>
+                        @endcan
+
                     </div>
                 @endforeach
             </div>
@@ -79,7 +86,6 @@
                     @foreach ($solution->comments as $comment)
                         <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
                             <div class="flex items-start space-x-3 gap-3">
-
                                 <div class="mr-23">
                                     <div
                                         class="rounded-full h-7 w-7 bg-indigo-600 flex items-center justify-center p-2 text-white font-bold">

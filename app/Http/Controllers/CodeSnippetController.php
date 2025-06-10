@@ -57,7 +57,7 @@ class CodeSnippetController extends Controller
     {
         $codeSnippet = CodeSnippet::findOrFail($id);
 
-        return view('code_snippet.edit', compact($codeSnippet));
+        return view('code_snippet.edit', compact('codeSnippet'));
     }
 
     /**
@@ -66,9 +66,14 @@ class CodeSnippetController extends Controller
     public function update(Request $request, string $id)
     {
         $codeSnippet = CodeSnippet::findOrFail($id) ;
+
+        if($request->user()->cannot('update', $codeSnippet)){
+            return redirect()->back()->with('error','Você não tem permissão para modificar esse código');
+        }
+
         $data = $request->validate([
             'title' => 'required|string|max:50',
-            'code'=> 'required|string|',
+            'code'=> 'required|string',
             'solution_id' => 'exists:solutions,id'
         ]);
 
