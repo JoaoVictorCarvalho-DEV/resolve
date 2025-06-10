@@ -16,15 +16,18 @@
                     Criado por: {{ $solution->user->name ?? 'Desconhecido' }}
                 </div>
 
-                <div class='grid grid-cols-2 gap-5'>
+                <div class='grid grid-flow-col-dense gap-5'>
                     <a href="{{ route('solutions.show', $solution) }}"
                         class="inline-block bg-indigo-500 text-white text-sm px-4 py-2 rounded hover:bg-indigo-600 transition">
                         Ver detalhes
                     </a>
-                    <a href="{{ route('solutions.edit', $solution) }}"
-                        class="inline-block bg-orange-500 text-white text-sm px-4 py-2 rounded hover:bg-orange-600 transition">
-                        Editar
-                    </a>
+                    @can('update', [$solution])
+                        <a href="{{ route('solutions.edit', $solution) }}"
+                            class="inline-block bg-orange-500 text-white text-sm px-4 py-2 rounded hover:bg-orange-600 transition">
+                            Editar
+                        </a>
+                    @endcan
+
                 </div>
             </div>
         @endforeach

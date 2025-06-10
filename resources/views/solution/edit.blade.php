@@ -12,6 +12,11 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if (session('error'))
+            <div class="bg-red-400 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <form action="{{ route('solutions.update', $solution->id) }}" method="POST" class="space-y-4">
             @csrf

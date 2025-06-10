@@ -6,7 +6,7 @@ use App\Models\Solution;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -117,12 +117,21 @@ class SolutionController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $solution = Solution::findOrFail($id);
+
+        if($request->user()->cannot('update',$solution)){
+            return redirect()->back()->with('error','Você não tem permissão para alterar essa solução.');
+        }
+
         $data = $request->validate([
             'title'         => 'sometimes|string|max:255',
             'description'   => 'sometimes|string',
         ]);
 
-        $solution = Solution::findOrFail($id);
+
+
+        /* Gate::authorize('update', $solution); */
 
         $solution->update($data);
 
