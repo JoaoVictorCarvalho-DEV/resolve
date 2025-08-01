@@ -29,8 +29,15 @@
                     @endcan
 
                 </div>
+
             </div>
         @endforeach
+
     </div>
+
+    <div class='px-52'>
+        {{ $solutions->links() }}
+    </div>
+
 
 </x-app-layout>

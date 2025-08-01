@@ -17,7 +17,8 @@ class SolutionController extends Controller
      */
     public function index()
     {
-        $solutions = Solution::all();
+        /* $solutions = Solution::all(); */
+        $solutions = Solution::orderBy("created_at","desc")->paginate(6);
         return view('solution.index', compact('solutions'));
     }
 
