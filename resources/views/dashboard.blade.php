@@ -12,6 +12,7 @@
                     {{ __("Você está logado!") }}
                 </div>
             </div>
+            <x-alert type="warning" :message="'success'"/>
         </div>
     </div>
 </x-app-layout>
